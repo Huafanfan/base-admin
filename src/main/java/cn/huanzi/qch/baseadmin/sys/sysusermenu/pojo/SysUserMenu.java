@@ -3,8 +3,6 @@ package cn.huanzi.qch.baseadmin.sys.sysusermenu.pojo;
 import cn.huanzi.qch.baseadmin.sys.sysmenu.pojo.SysMenu;
 import cn.huanzi.qch.baseadmin.sys.sysuser.pojo.SysUser;
 import lombok.Data;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,13 +23,13 @@ public class SysUserMenu implements Serializable {
 
     private Date updateTime;//修改时间
 
-    @OneToOne
-    @JoinColumn(name = "userId",referencedColumnName = "userId", insertable = false, updatable = false)
-    @NotFound(action= NotFoundAction.IGNORE)
+    //@OneToOne
+    //@JoinColumn(name = "userId",referencedColumnName = "userId", insertable = false, updatable = false)
+    //@NotFound(action= NotFoundAction.IGNORE)
     private SysUser sysUser;//用户
 
-    @OneToOne
-    @JoinColumn(name = "menuId",referencedColumnName = "menuId", insertable = false, updatable = false)
-    @NotFound(action= NotFoundAction.IGNORE)
+    //@OneToOne
+    //@JoinColumn(name = "menuId",referencedColumnName = "menuId", insertable = false, updatable = false)
+    //@NotFound(action= NotFoundAction.IGNORE)
     private SysMenu sysMenu;//菜单
 }

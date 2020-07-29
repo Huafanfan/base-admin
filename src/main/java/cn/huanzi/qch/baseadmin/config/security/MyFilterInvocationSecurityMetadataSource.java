@@ -60,7 +60,9 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
         Map<RequestMatcher, Collection<ConfigAttribute>> map = new ConcurrentHashMap<>();
         for (SysAuthorityVo sysAuthorityVo : authorityVoList) {
             String authorityName = sysAuthorityVo.getAuthorityName();
-            if (StringUtils.isEmpty(sysAuthorityVo.getAuthorityContent())) continue;
+            if (StringUtils.isEmpty(sysAuthorityVo.getAuthorityContent())) {
+                continue;
+            }
             for (String url : sysAuthorityVo.getAuthorityContent().split(",")) {
                 Collection<ConfigAttribute> value = map.get(new AntPathRequestMatcher(url));
                 if (StringUtils.isEmpty(value)) {

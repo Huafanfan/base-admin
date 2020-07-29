@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionInformation;
@@ -20,6 +21,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -140,6 +142,9 @@ public class LoginSuccessHandlerConfig implements AuthenticationSuccessHandler {
         out.print(msg);
         out.flush();
         out.close();
+
+        //RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher("/");
+        //requestDispatcher.forward(httpServletRequest,httpServletResponse);
     }
 
     @Bean

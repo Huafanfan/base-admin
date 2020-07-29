@@ -6,6 +6,7 @@ import cn.huanzi.qch.baseadmin.common.service.CommonServiceImpl;
 import cn.huanzi.qch.baseadmin.sys.syssetting.service.SysSettingService;
 import cn.huanzi.qch.baseadmin.sys.sysshortcutmenu.service.SysShortcutMenuService;
 import cn.huanzi.qch.baseadmin.sys.sysshortcutmenu.vo.SysShortcutMenuVo;
+import cn.huanzi.qch.baseadmin.sys.sysuser.mapper.SysUserMapper;
 import cn.huanzi.qch.baseadmin.sys.sysuser.pojo.SysUser;
 import cn.huanzi.qch.baseadmin.sys.sysuser.repository.SysUserRepository;
 import cn.huanzi.qch.baseadmin.sys.sysuser.vo.SysUserVo;
@@ -39,8 +40,11 @@ public class SysUserServiceImpl extends CommonServiceImpl<SysUserVo, SysUser, St
 
     @PersistenceContext
     private EntityManager em;
+    //@Autowired
+    //private SysUserRepository sysUserRepository;
+
     @Autowired
-    private SysUserRepository sysUserRepository;
+    private SysUserMapper sysUserMapper;
 
     @Autowired
     private SysSettingService sysSettingService;
@@ -141,7 +145,8 @@ public class SysUserServiceImpl extends CommonServiceImpl<SysUserVo, SysUser, St
 
     @Override
     public Result<SysUserVo> findByLoginName(String username) {
-        return Result.of(CopyUtil.copy(sysUserRepository.findByLoginName(username), SysUserVo.class));
+        return Result.of(CopyUtil.copy(sysUserMapper.findByLoginName(username), SysUserVo.class));
+        //return Result.of(CopyUtil.copy(sysUserRepository.findByLoginName(username), SysUserVo.class));
     }
 
     @Bean

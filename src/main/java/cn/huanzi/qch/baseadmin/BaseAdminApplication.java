@@ -103,6 +103,7 @@ class IndexController {
      */
     @GetMapping("loginPage")
     public ModelAndView login(){
+        log.info("进入/loginPage");
         ModelAndView modelAndView = new ModelAndView("login");
 
         //系统信息
@@ -123,6 +124,7 @@ class IndexController {
     public void index1(HttpServletResponse response){
         //内部重定向
         try {
+            log.info("进入/");
             response.sendRedirect("/index");
         } catch (IOException e) {
             //输出到日志文件中
@@ -131,6 +133,7 @@ class IndexController {
     }
     @GetMapping("index")
     public ModelAndView index(){
+        log.info("进入/index");
         ModelAndView modelAndView = new ModelAndView("index");
 
         //系统信息
@@ -138,6 +141,7 @@ class IndexController {
 
         //登录用户
         SysUserVo sysUserVo = sysUserService.findByLoginName(SecurityUtil.getLoginUser().getUsername()).getData();
+        log.info("sysUserVo："+sysUserVo.toString());
         sysUserVo.setPassword(null);//隐藏部分属性
         modelAndView.addObject( "loginUser", sysUserVo);
 

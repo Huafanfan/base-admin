@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huanzi.qch.baseadmin.sys.sysusermenu.mapper.SysUserMenuMapper">
+
+    <resultMap type="cn.huanzi.qch.baseadmin.sys.sysusermenu.pojo.SysUserMenu" id="queryUserMenu">
+        <id column="user_menu_id" property="userMenuId"/>
+        <result column="userId" property="userId"/>
+        <result column="menuId" property="menuId"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <association property="sysUser" javaType="cn.huanzi.qch.baseadmin.sys.sysuser.pojo.SysUser">
+            <id column="user_id" property="userId"/>
+            <result column="login_name" property="loginName"/>
+            <result column="user_name" property="userName"/>
+            <result column="password" property="password"/>
+            <result column="valid" property="valid"/>
+            <result column="limited_ip" property="limitedIp"/>
+            <result column="expired_time" property="expiredTime"/>
+            <result column="last_change_pwd_time" property="lastChangePwdTime"/>
+            <result column="limit_multi_login" property="limitMultiLogin"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
+        </association>
+        <association property="sysMenu" javaType="cn.huanzi.qch.baseadmin.sys.sysmenu.pojo.SysMenu">
+            <id column="menu_id" property="menuId"/>
+            <result column="menu_name" property="menuName"/>
+            <result column="menu_path" property="menuPath"/>
+            <result column="menu_parent_id" property="menuParentId"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
+        </association>
+    </resultMap>
+
+    <select id="findByUserId" resultMap="queryUserMenu">
+    select a.*,
+           b.login_name,b.user_name,b.password,b.valid,b.limited_ip,b.expired_time,b.last_change_pwd_time,b.limit_multi_login,b.create_time,b.update_time,
+           c.menu_name,c.menu_path,c.menu_parent_id,c.create_time,c.update_time
+    from sys_user_menu a,sys_user b,sys_menu c
+    where a.user_id = b.user_id and a.menu_id = c.menu_id and a.user_id = #{userId}
+  </select>
+
+</mapper>

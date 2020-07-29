@@ -3,6 +3,7 @@ package cn.huanzi.qch.baseadmin.sys.sysusermenu.service;
 import cn.huanzi.qch.baseadmin.common.pojo.Result;
 import cn.huanzi.qch.baseadmin.common.service.CommonServiceImpl;
 import cn.huanzi.qch.baseadmin.sys.sysmenu.vo.SysMenuVo;
+import cn.huanzi.qch.baseadmin.sys.sysusermenu.mapper.SysUserMenuMapper;
 import cn.huanzi.qch.baseadmin.sys.sysusermenu.pojo.SysUserMenu;
 import cn.huanzi.qch.baseadmin.sys.sysusermenu.repository.SysUserMenuRepository;
 import cn.huanzi.qch.baseadmin.sys.sysusermenu.vo.SysUserMenuVo;
@@ -25,11 +26,13 @@ public class SysUserMenuServiceImpl extends CommonServiceImpl<SysUserMenuVo, Sys
     private EntityManager em;
     @Autowired
     private SysUserMenuRepository sysUserMenuRepository;
+    @Autowired
+    private SysUserMenuMapper sysUserMenuMapper;
 
     @Override
     public Result<List<SysMenuVo>> findByUserId(String userId) {
         List<SysMenuVo> menuVoList = new ArrayList<>();
-        List<SysUserMenuVo> sysUserMenuVoList = CopyUtil.copyList(sysUserMenuRepository.findByUserId(userId), SysUserMenuVo.class);
+        List<SysUserMenuVo> sysUserMenuVoList = CopyUtil.copyList(sysUserMenuMapper.findByUserId(userId), SysUserMenuVo.class);
         sysUserMenuVoList.forEach((sysUserMenuVo) -> {
             SysMenuVo sysMenuVo = sysUserMenuVo.getSysMenu();
             if(StringUtils.isEmpty(sysMenuVo.getMenuParentId())){

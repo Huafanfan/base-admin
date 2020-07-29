@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 //登录处理
-                .addFilterBefore(captchaFilterConfig, UsernamePasswordAuthenticationFilter.class)
+                //.addFilterBefore(captchaFilterConfig, UsernamePasswordAuthenticationFilter.class)//取消验证码
                 .formLogin()
                 .loginProcessingUrl("/login")
                 //未登录时默认跳转页面
