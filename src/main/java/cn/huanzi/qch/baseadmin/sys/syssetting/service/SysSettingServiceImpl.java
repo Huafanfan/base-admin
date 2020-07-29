@@ -2,6 +2,7 @@ package cn.huanzi.qch.baseadmin.sys.syssetting.service;
 
 import cn.huanzi.qch.baseadmin.common.pojo.Result;
 import cn.huanzi.qch.baseadmin.common.service.CommonServiceImpl;
+import cn.huanzi.qch.baseadmin.sys.syssetting.mapper.SysSettingMapper;
 import cn.huanzi.qch.baseadmin.sys.syssetting.pojo.SysSetting;
 import cn.huanzi.qch.baseadmin.sys.syssetting.repository.SysSettingRepository;
 import cn.huanzi.qch.baseadmin.sys.syssetting.vo.SysSettingVo;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,6 +24,9 @@ public class SysSettingServiceImpl extends CommonServiceImpl<SysSettingVo, SysSe
     @Autowired
     private SysSettingRepository sysSettingRepository;
 
+    @Autowired
+    private SysSettingMapper sysSettingMapper;
+
     @Override
     public Result<SysSettingVo> save(SysSettingVo entityVo) {
         //调用父类
@@ -31,5 +36,10 @@ public class SysSettingServiceImpl extends CommonServiceImpl<SysSettingVo, SysSe
         SysSettingUtil.setSysSettingMap(result.getData());
 
         return result;
+    }
+
+    @Override
+    public List<SysSettingVo> selectSysSetting() {
+        return sysSettingMapper.selectSysSetting();
     }
 }
